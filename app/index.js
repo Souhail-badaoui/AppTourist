@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet, ActivityIndicator } from "react-native";
 import axios from "axios";
 import { useRouter } from "expo-router";
-import { useAttractionStore } from "./store"; // 🔥 for favorites
+import { useAttractionStore } from "./store"; 
 
 export default function HomePage() {
   const [data, setData] = useState([]);
