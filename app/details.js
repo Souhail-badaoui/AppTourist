@@ -7,7 +7,7 @@ import { useAttractionStore } from "./store";
 
 export default function DetailsPage() {
   const router = useRouter();
-  const { id } = useLocalSearchParams(); // get id from URL
+  const { id } = useLocalSearchParams(); 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const { toggleFavorite, favorites } = useAttractionStore();
