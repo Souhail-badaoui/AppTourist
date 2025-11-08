@@ -28,19 +28,19 @@ export default function WelcomeScreen() {
   ];
   const [current, setCurrent] = useState(0);
   const nextSlide = () => {
-    if (current < 2) {
+    if (current < slides.length - 1) { 
       setCurrent(current + 1);
     } else {
       setCurrent(0);
     }
   };
-  return (
+  return ( 
     <SafeAreaProvider>
     <ScrollView
       horizontal
       pagingEnabled
       showsHorizontalScrollIndicator={false}
-      onScroll={handleScroll}
+      onScroll={nextSlide}
       scrollEventThrottle={16}
       style={{ flex: 1 }}
     >
@@ -62,18 +62,23 @@ export default function WelcomeScreen() {
        </View>
    
     </ScrollView>
-      <View style={styles.dotsContainer}>
-    <View style={[styles.dot, { backgroundColor: current === 0 ? "#007bff" : "#ccc" }]} />
-    <View style={[styles.dot, { backgroundColor: current === 1 ? "#007bff" : "#ccc" }]} />
-    <View style={[styles.dot, { backgroundColor: current === 2 ? "#007bff" : "#ccc" }]} />
-  </View>
+        <View style={styles.dotsContainer}>
+          {slides.map((_, index) => (
+            <View
+              key={index}
+              style={[
+                styles.dot,
+                { backgroundColor: index === current ? "#007bff" : "#ccc" },
+              ]}
+            />
+          ))}
+        </View>
       <TouchableOpacity 
         style={styles.button}
-        onPress={() => router.push('Home')}
+        onPress={() => router.push('/home')}
       >
         <Text style={styles.buttonText}>Get Started</Text>
       </TouchableOpacity>
-
   </SafeAreaProvider>
   );
 }
@@ -81,7 +86,6 @@ export default function WelcomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  
     alignItems: "center",
     justifyContent: "center",
     padding: 60,

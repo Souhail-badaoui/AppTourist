@@ -6,7 +6,7 @@ const router = useRouter();
   useEffect(() =>{
    const timer = setTimeout(()=>{
       router.replace('welcome');
-    } ,8000); 
+    } ,3000); 
     return () => clearTimeout(timer);
   } ,[]);
   return(

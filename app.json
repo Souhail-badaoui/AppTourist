@@ -27,6 +27,10 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "experimental": {
+      "turboModules": true
+    }
   }
+
 }
