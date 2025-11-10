@@ -1,7 +1,7 @@
 // app/store.js
 import { create } from "zustand";
 
-export const useAttractionStore = create((set) => ({
+export const useFavoritesStore = create((set) => ({
   favorites: [],
   selectedAttraction: null,
 

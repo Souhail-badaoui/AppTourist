@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import axios from "axios";
-import { useAttractionStore } from "./store";
+import { useFavoritesStore } from "../store/store";
 
 export default function DetailsPage() {
   const router = useRouter();
   const { id } = useLocalSearchParams(); 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { toggleFavorite, favorites } = useAttractionStore();
+  const { toggleFavorite, favorites } = useFavoritesStore();
 
   const isFavorite = favorites.includes(id);
 
@@ -52,18 +52,18 @@ export default function DetailsPage() {
         <Text style={{ color: "#fff" }}>{isFavorite ? "❤️ Favorited" : "🤍 Add to Favorites"}</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.backBtn} onPress={() => router.back()}>
-        <Text style={{ color: "#333" }}>⬅ Back</Text>
+      <TouchableOpacity style={styles.backBtn} onPress={() => router.back('/home')}>
+        <Text style={{ color: "#333" ,fontSize: 18 }}>⬅ Back</Text>
       </TouchableOpacity>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 15, backgroundColor: "#fff" },
-  image: { width: "100%", height: 250, borderRadius: 12, marginBottom: 10 },
+  container: { flex: 1, padding: 15, backgroundColor: "#fff", marginTop: 20 },
+  image: { width: "100%", height: 250, borderRadius: 12, marginBottom: 50, position:'relative', top: 40 },
   name: { fontSize: 22, fontWeight: "bold", marginBottom: 8 },
-  description: { fontSize: 16, color: "#555", lineHeight: 22 },
+  description: { fontSize: 14, color: "#555", lineHeight: 22 },
   favoriteBtn: {
     backgroundColor: "#4A90E2",
     padding: 12,

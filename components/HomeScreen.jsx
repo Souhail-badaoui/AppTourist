@@ -7,13 +7,16 @@ import {
   ScrollView, 
   TouchableOpacity, 
   ActivityIndicator ,
-  TextInput
+  TextInput,
+  Pressable
 } from "react-native";
 import axios from "axios";
 import { Ionicons } from "@expo/vector-icons";
 import Animated, { ZoomIn} from "react-native-reanimated";
+import { useRouter } from "expo-router";
 
 export default function HomeScreen() {
+  const router = useRouter();
   const [destinations, setDestinations] = useState([]);
   const [AllDestinations, setAllDestinations] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,7 +28,7 @@ export default function HomeScreen() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("https://690f362145e65ab24ac2e1f5.mockapi.io/Data");
+        const res = await axios.get("https://69086a582d902d0651b03223.mockapi.io/api/v1/places");
         setDestinations(res.data);
         setAllDestinations(res.data);
         setLoading(false);
@@ -85,13 +88,14 @@ export default function HomeScreen() {
             onChangeText={handleSearch}
           />
         </View>
-     x
+     <View>
       
       <Text style={styles.title}>
         Explore the{" "}
         <Text style={styles.highlight1}>Beautiful</Text>
         <Text style={styles.highlight}> world!</Text>
       </Text>
+      </View>
  <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryContainer}>
         {categories.map((cat, i) => (
           <TouchableOpacity
@@ -129,14 +133,12 @@ export default function HomeScreen() {
     style={styles.card}
   >
 
-          <View key={index} style={styles.card}>
-            <Image source={{ uri: item.image }} style={styles.cardImage} />
+          <Pressable key={index} style={styles.card} onPress={() => {router.push(`/details?id=${item.id}`) }}>
+            <Image source={{ uri: item.thumbnail }} style={styles.cardImage} />
             <View style={styles.cardInfo}>
-              <Text style={styles.cardTitle}>{item.name}</Text>
-              <Text style={styles.cardLocation}>{item.location}</Text>
-              <Text style={styles.rating}>⭐ {item.rating}</Text>
+              <Text style={styles.cardTitle}>{item.name}</Text>              
             </View>
-          </View>
+          </Pressable>
           </Animated.View>
         ))}
     
@@ -210,9 +212,9 @@ const styles = StyleSheet.create({
     elevation: 3,
     
   },
-  cardImage: { width: "100%", height: 180 , },
+  cardImage: { width: "100%", height: 260 , },
   cardInfo: { padding: 10 },
   cardTitle: { fontSize: 16, color: "#333" },
-  cardLocation: { fontSize: 13, color: "#777", marginVertical: 4 },
+  cardLocation: { fontSize: 10, color: "#777", marginVertical: 4 },
   rating: { fontSize: 13, color: "#ff9900" },
 });

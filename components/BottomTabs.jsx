@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { View, TouchableOpacity, Text, StyleSheet, Animated } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
+import { useRouter } from "expo-router";
 export default function BottomTabs() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("Home");
   const scaleValue = new Animated.Value(1);
 
@@ -12,12 +13,13 @@ export default function BottomTabs() {
       Animated.timing(scaleValue, { toValue: 1.2, duration: 150, useNativeDriver: true }),
       Animated.timing(scaleValue, { toValue: 1, duration: 150, useNativeDriver: true }),
     ]).start();
+    router.push(`/${tab.toLowerCase()}`);
   };
 
   const tabs = [
     { name: "Home", icon: "home-outline" },
     { name: "Calendar", icon: "calendar-outline" },
-    { name: "Messages", icon: "chatbubble-outline" },
+    { name: "Favorites", icon: "heart-outline" , router: "/favorites"},
     { name: "Profile", icon: "person-outline" },
   ];
 
@@ -30,7 +32,7 @@ export default function BottomTabs() {
             key={tab.name}
             style={styles.tab}
             onPress={() => handlePress(tab.name)}
-            activeOpacity={0.8}
+            activeOpacity={0.8} 
           >
             <Animated.View
               style={[
