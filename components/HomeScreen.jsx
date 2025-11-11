@@ -28,7 +28,7 @@ export default function HomeScreen() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("https://69086a582d902d0651b03223.mockapi.io/api/v1/places");
+        const res = await axios.get("https://690f362145e65ab24ac2e1f5.mockapi.io/Data");
         setDestinations(res.data);
         setAllDestinations(res.data);
         setLoading(false);
@@ -134,9 +134,11 @@ export default function HomeScreen() {
   >
 
           <Pressable key={index} style={styles.card} onPress={() => {router.push(`/details?id=${item.id}`) }}>
-            <Image source={{ uri: item.thumbnail }} style={styles.cardImage} />
+            <Image source={{ uri: item.image}} style={styles.cardImage} />
             <View style={styles.cardInfo}>
-              <Text style={styles.cardTitle}>{item.name}</Text>              
+              <Text style={styles.cardTitle}>{item.name}</Text>
+               <Text style={styles.cardLocation}>{item.location}</Text>
+                <Text style={styles.rating}>⭐ {item.rating}</Text>
             </View>
           </Pressable>
           </Animated.View>
@@ -212,7 +214,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     
   },
-  cardImage: { width: "100%", height: 260 , },
+  cardImage: { width: "100%", height: 180 , },
   cardInfo: { padding: 10 },
   cardTitle: { fontSize: 16, color: "#333" },
   cardLocation: { fontSize: 10, color: "#777", marginVertical: 4 },

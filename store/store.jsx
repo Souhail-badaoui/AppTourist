@@ -5,11 +5,11 @@ export const useFavoritesStore = create((set) => ({
   favorites: [],
   selectedAttraction: null,
 
-  toggleFavorite: (id) =>
+  toggleFavorite: (item) =>
     set((state) => ({
-      favorites: state.favorites.includes(id)
-        ? state.favorites.filter((fav) => fav !== id)
-        : [...state.favorites, id],
+      favorites: state.favorites.find((fav) => fav.id === item.id)
+        ? state.favorites.filter((fav) => fav.id !== item.id)
+        : [...state.favorites, item],
     })),
 
   setSelectedAttraction: (attraction) => set({ selectedAttraction: attraction }),

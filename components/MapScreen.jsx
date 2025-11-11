@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   Image,
+  TouchableOpacity,
   TextInput,
   ScrollView,
   Dimensions,
@@ -12,10 +13,12 @@ import {
 import MapView, { Marker } from "react-native-maps";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
+import { useRouter } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
 export default function MapScreen() {
+  const router = useRouter();
   const [places, setPlaces] = useState([]);
   const mapRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -130,7 +133,15 @@ export default function MapScreen() {
             </View>
           </View>
         ))}
-      </ScrollView>
+         </ScrollView>
+      <TouchableOpacity
+        style={styles.backBtn}
+        onPress={() => router.back("/details")}
+      >
+        <Ionicons name="arrow-back" size={24} color="#fff" />
+      </TouchableOpacity>
+               
+     
     </View>
   );
 }
@@ -176,4 +187,12 @@ const styles = StyleSheet.create({
   image: { width: 90, height: 90, borderRadius: 15, marginRight: 10, backgroundColor: "#f3f2f2ff" },
   title: { fontSize: 16, fontWeight: "bold", color: "#fff",position: "relative", top: 10 },
   desc: { fontSize: 12, color: "#f0efefff", marginTop: 22 },
+     backBtn: {
+    position: "absolute",
+    top: 720,
+    left: 10,
+    backgroundColor: "rgba(34, 161, 245, 1)",
+    borderRadius: 25,
+    padding: 8,
+  },
 });

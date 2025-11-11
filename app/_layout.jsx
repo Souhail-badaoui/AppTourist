@@ -7,8 +7,7 @@ export default function Layout() {
       <Stack.Screen name="welcome"  />
       <Stack.Screen name="favorites"  />
       <Stack.Screen name="details"  />
-      
-       
+      <Stack.Screen name="maps"  />
     </Stack>
   );
 }
